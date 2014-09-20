@@ -36,7 +36,6 @@ public:
 	void print();
 
 private:
-	const unsigned int MAX_SIZE = -1;
 
 	E** elements;
 
@@ -114,9 +113,9 @@ array.
 template<class E>
 bool DArray<E>::swap(unsigned int i, unsigned int j){
 	if(i == j) return true;
-	if(i == -1) i = length - 1;
-	if(j == -1) j = length - 1;
-	if(i >= length || j >= length) return false;
+	if(i == -1) i = _length - 1;
+	if(j == -1) j = _length - 1;
+	if(i >= _length || j >= _length) return false;
 
 	E* temp = elements[i];
 	elements[i] = elements[j];
@@ -214,7 +213,9 @@ will return false.
 **/
 template<class E>
 E DArray<E>::get(unsigned int index){
-	if(index >= _length) return 0;
+	if(index == -1) index = _length-1;
+	if(index >= _length || _length == 0) return 0;
+	
 	return *elements[index];
 }
 
