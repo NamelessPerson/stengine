@@ -4,17 +4,19 @@
 #include "GridController.h"
 #include "SceneNode.h"
 #include "FixedGrid.h"
-#include "DArray.h"
+#include "DataStructs/DArray.h"
 
 class SceneManager{
 public:
 	void tick(float dt);
-	void addTickable(GridController obj);
-	void addSceneNode(SceneNode node);
+	void addTickable(ITickable* obj);
+	ISceneGraph* graph();
+	static SceneManager* instance();
+
 private:
+	ISceneGraph* _graph;
 	SceneManager() {};
-	FixedGrid graph;
-	DArray<GridController*> controllers;
+	DArray<ITickable> controllers;
 	static SceneManager* _instance;
 };
 
@@ -25,11 +27,16 @@ void SceneManager::tick(float dt){
 		controllers.get(i)->tick(dt);
 }
 
-void SceneManager::addTickable(GridController obj){
-	controllers.add(&obj);
+void SceneManager::addTickable(ITickable* obj){
+	controllers.add(obj);
 }
 
-void SceneManager::addSceneNode(SceneNode node){
-	//TODO
+ISceneGraph* SceneManager::graph(){
+	return _graph;
+}
+
+SceneManager* SceneManager::instance(){
+	if(_instance == 0) _instance = new SceneManager();
+	return _instance;
 }
 #endif

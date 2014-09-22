@@ -1,7 +1,7 @@
 NAME = main
 TARBALL = jphilli2-$(NAME).tar.gz
-SRC = main.cpp Debug.cpp
-TSRC = unit_test.cpp Debug.cpp
+SRC = main.cpp
+TSRC = unit_test.cpp
 OBJ = $(SRC:.cpp=.o)
 TOBJ = $(TSRC:.cpp=.o)
 RM = rm -f

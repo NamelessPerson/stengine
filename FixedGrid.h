@@ -1,7 +1,7 @@
 #ifndef _FIXED_GRID_H_
 #define _FIXED_GRID_H_
 
-#include "DArray.h"
+#include "DataStructs/DArray.h"
 #include "ISceneGraph.h"
 
 class FixedGrid : ISceneGraph{
@@ -43,4 +43,21 @@ FixedGrid::FixedGrid(unsigned int _width, unsigned int _height){
 FixedGrid::~FixedGrid(){
 	delete [] graph;
 }
+
+void FixedGrid::addSceneNode(SceneNode node){
+
+}
+
+void FixedGrid::removeSceneNode(SceneNode node){
+
+}
+
+void FixedGrid::updateSceneNode(SceneNode node, int x, int y){
+
+}
+
+DArray<SceneNode> FixedGrid::getColliders(SceneNode node){}
+DArray<SceneNode> FixedGrid::getColliders(int x, int y){}
+DArray<SceneNode> FixedGrid::getColliders(int x, int y, int radius){}
+DArray<SceneNode> FixedGrid::getColliders(int cornerX1, int cornerY1, int cornerX2, int cornerY2){}
 #endif

@@ -10,10 +10,11 @@ public:
 	~Stack();
 
 	bool push(E);
+	bool push(E*);
 	bool empty();
 
-	E pop();
-	E peek();
+	E* pop();
+	E* peek();
 
 	unsigned int size();
 private:
@@ -36,17 +37,22 @@ bool Stack<E>::push(E item){
 }
 
 template <class E>
+bool Stack<E>::push(E* item){
+	return stack->add(item);
+}
+
+template <class E>
 bool Stack<E>::empty(){
 	return stack->length() == 0;
 }
 
 template <class E>
-E Stack<E>::pop(){
+E* Stack<E>::pop(){
 	return stack->remove(-1);
 }
 
 template <class E>
-E Stack<E>::peek(){
+E* Stack<E>::peek(){
 	return stack->get(-1);
 }
 

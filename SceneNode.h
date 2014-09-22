@@ -9,6 +9,7 @@ public:
 	void setY(int Y);
 private:
 	int x,y;
+	void* actor;
 
 };
 

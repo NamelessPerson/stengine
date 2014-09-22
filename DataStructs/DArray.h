@@ -27,11 +27,13 @@ public:
 
 	bool swap(unsigned int, unsigned int);
 	bool insert(E, unsigned int);
+	bool insert(E*, unsigned int);
 	bool toFront(unsigned int);
 	bool add(E);
+	bool add(E*);
 
-	E remove(unsigned int);
-	E get(unsigned int);
+	E* remove(unsigned int);
+	E* get(unsigned int);
 
 	void print();
 
@@ -149,6 +151,29 @@ bool DArray<E>::insert(E item, unsigned int index){
 
 /**
 ==============================================
+	insert(E* item, unsigned int index)
+
+Will insert item into the array at index. If an
+index of -1 is inputted, it will place the item
+at the end of the array instead. If index is
+outside the scope of the array (and not -1),
+the function will return false.
+==============================================
+**/
+template<class E>
+bool DArray<E>::insert(E* item, unsigned int index){
+	if(index == -1) index = _length;
+	if(index > _length) return false;
+	if(_length == _allocated && !resize()) return false;
+
+	if(index != _length - 1)memmove(elements+index+1, elements+index, (_length-index)*sizeof(E*));
+	elements[index] = item;
+	_length ++;
+	return true;
+}
+
+/**
+==============================================
 	toFront(unsigned int index)
 
 Pushes the object at index to the front of the
@@ -182,6 +207,18 @@ bool DArray<E>::add(E item){
 
 /**
 ==============================================
+	add(E* item)
+
+Adds item to the array by calling insert.
+==============================================
+**/
+template<class E>
+bool DArray<E>::add(E* item){
+	return insert(item, -1);
+}
+
+/**
+==============================================
 	E remove(unsigned int index)
 
 Removes an item from the array and shifts all
@@ -189,12 +226,11 @@ proceeding objects down.
 ==============================================
 **/
 template<class E>
-E DArray<E>::remove(unsigned int index){
+E* DArray<E>::remove(unsigned int index){
 	if(index == -1) index = _length-1;
 	if(index >= _length || _length == 0) return 0;
 
-	E temp = *elements[index];
-	delete elements[index];
+	E* temp = elements[index];
 	memmove(elements+index, elements+index+1, (_length - index -1)*sizeof(E*));
 	_length--;
 
@@ -212,11 +248,11 @@ will return false.
 ==============================================
 **/
 template<class E>
-E DArray<E>::get(unsigned int index){
+E* DArray<E>::get(unsigned int index){
 	if(index == -1) index = _length-1;
 	if(index >= _length || _length == 0) return 0;
 	
-	return *elements[index];
+	return elements[index];
 }
 
 /**
