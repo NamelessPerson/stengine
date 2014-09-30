@@ -2,7 +2,8 @@
 #include "DataStructs/Queue.h"
 #include "DataStructs/Stack.h"
 #include "Debug.h"
-#include "JSon/JParser.h"
+#include "Dispatcher.h"
+#include "SceneManager.h"
 
 #include <assert.h>
 #include <cstring>
@@ -10,6 +11,7 @@
 
 using namespace std;
 
+SceneManager* SceneManager::_instance = 0;
 Debug* Debug::_instance = 0;
 
 void testDArray(){
@@ -91,17 +93,23 @@ void testQueue(){
 	else cout<<"[PASSED] Checking Size"<<endl;
 }
 
+class dispatchTester{
+
+};
+
+void testDispatcher(){
+
+}
+
 int main(int argc, char const *argv[]){
-	
-	JParser jparser;
-	void* e = new Node<int>(5);
-	cout<< static_cast<Node<int>*>(e)->getData();
 
 	srand(time(0));
 
-	testDArray();
-	testStack();
-	testQueue();
+	testDispatcher();
+
+	//testDArray();
+	//testStack();
+	//testQueue();
 
 	return 0;
 }
