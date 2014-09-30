@@ -7,7 +7,7 @@ TOBJ = $(TSRC:.cpp=.o)
 RM = rm -f
 
 all: $(OBJ)
-	g++ $(OBJ) -o $(NAME) -mwin32
+	g++ $(OBJ) -o $(NAME) 
 
 test: $(TOBJ)
 	g++ $(TOBJ) -o test

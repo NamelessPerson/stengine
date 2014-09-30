@@ -94,7 +94,7 @@ void testQueue(){
 }
 
 class dispatchTester{
-
+	Dispatcher d;
 };
 
 void testDispatcher(){
