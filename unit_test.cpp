@@ -1,9 +1,9 @@
-#include "DataStructs/DArray.h"
-#include "DataStructs/Queue.h"
-#include "DataStructs/Stack.h"
-#include "Debug.h"
-#include "Dispatcher.h"
-#include "SceneManager.h"
+#include "util/datastructs/darray.h"
+#include "util/datastructs/stack.h"
+#include "util/datastructs/queue.h"
+#include "util/debug.h"
+/*#include "Dispatcher.h"
+#include "SceneManager.h"*/
 
 #include <assert.h>
 #include <cstring>
@@ -11,40 +11,40 @@
 
 using namespace std;
 
-SceneManager* SceneManager::_instance = 0;
+//SceneManager* SceneManager::_instance = 0;
 Debug* Debug::_instance = 0;
 
 void testDArray(){
 	DArray<int> arr;
 	int i,j;
-	unsigned int a;
+	unsigned int a, b;
 	cout<<"\n==== DArray ====\n"<<endl;
 	a = arr.allocated();
-	for(i = 0; i <= a+10; i ++){
+	for(b = 0; b <= a+10; b++){
 		j = rand();
 		if(!arr.add(j)) cout<< "[FAILED] Adding to array and retrieving"<<endl;
-		if(*arr.get(i) != j) cout<< "[FAILED] Adding to array and retrieving"<<endl;
-		if(arr.length() != i+1) cout<<"[FAILED] Array length"<<endl;
+		if(arr.get(b) != j) cout<< "[FAILED] Adding to array and retrieving"<<endl;
+		if(arr.length() != b+1) cout<<"[FAILED] Array length"<<endl;
 	}
 	cout<<"[PASSED] Adding to array and retrieving"<<endl;
 	if(arr.allocated() <= a) cout<<"[FAILED] Expanding Array"<<endl;
 	else cout<<"[PASSED] Expanding array"<<endl;
 
-	i = *arr.get(0);
-	j = *arr.get(-1);
+	i = arr.get(0);
+	j = arr.get(-1);
 	arr.swap(0, -1);
-	if(i != *arr.get(-1) || j != *arr.get(0)) cout<<"[FAILED] Swapping elements"<<endl;
+	if(i != arr.get(-1) || j != arr.get(0)) cout<<"[FAILED] Swapping elements"<<endl;
 	else cout<<"[PASSED] Swapping elements"<<endl;
 
 	arr.insert(-1, 5);
-	if(*arr.get(5) != -1) cout<<"[FAILED] Inserting"<<endl;
+	if(arr.get(5) != -1) cout<<"[FAILED] Inserting"<<endl;
 	else cout<<"[PASSED] Inserting"<<endl;
 
-	i = *arr.get(3);
-	j = *arr.get(4);
+	i = arr.get(3);
+	j = arr.get(4);
 
 	arr.toFront(3);
-	if(*arr.get(0) == i && *arr.get(4) == j) cout<<"[PASSED] Moving to front"<<endl;
+	if(arr.get(0) == i && arr.get(4) == j) cout<<"[PASSED] Moving to front"<<endl;
 	else cout<<"[FAILED] Moving to front"<<endl;
 
 }
@@ -60,11 +60,11 @@ void testStack(){
 	if(s.size() != 3) cout<<"[FAILED] Checking size"<<endl;
 	else cout<<"[PASSED] Checking Size"<<endl;
 
-	if(*s.peek() != 3) cout<<"[FAILED] Peeking"<<endl;
+	if(s.peek() != 3) cout<<"[FAILED] Peeking"<<endl;
 	else cout<<"[PASSED] Peeking"<<endl;
 
-	//if(s.pop() != 3 || s.pop() != 2 || s.pop() != 1) cout<<"[FAILED] Popping from stack"<<endl;
-	//else cout<<"[PASSED] Popping from stack"<<endl;
+	if(s.pop() != 3 || s.pop() != 2 || s.pop() != 1) cout<<"[FAILED] Popping from stack"<<endl;
+	else cout<<"[PASSED] Popping from stack"<<endl;
 
 	if(s.size() != 0) cout<<"[FAILED] Checking size"<<endl;
 	else cout<<"[PASSED] Checking Size"<<endl;
@@ -93,23 +93,23 @@ void testQueue(){
 	else cout<<"[PASSED] Checking Size"<<endl;
 }
 
-class dispatchTester{
+/*class dispatchTester{
 	Dispatcher d;
 };
 
 void testDispatcher(){
 
-}
+}*/
 
 int main(int argc, char const *argv[]){
 
 	srand(time(0));
 
-	testDispatcher();
+	//testDispatcher();
 
-	//testDArray();
-	//testStack();
-	//testQueue();
+	testDArray();
+	testStack();
+	testQueue();
 
 	return 0;
 }

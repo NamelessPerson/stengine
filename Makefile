@@ -1,16 +1,25 @@
 NAME = main
-TARBALL = jphilli2-$(NAME).tar.gz
+TEST = test
+
 SRC = main.cpp
 TSRC = unit_test.cpp
 OBJ = $(SRC:.cpp=.o)
 TOBJ = $(TSRC:.cpp=.o)
+
+CC = g++
+CXX = g++
+CXXFLAGS += -std=c++11 -Wall -Werror
+LDFLAGS += -Wall -Werror
 RM = rm -f
 
-all: $(OBJ)
-	g++ $(OBJ) -o $(NAME) 
+all: $(NAME)
 
-test: $(TOBJ)
-	g++ $(TOBJ) -o test
+$(NAME): $(OBJ)
+
+unit: $(TEST)
+
+$(TEST): $(TOBJ)
+	g++ $(TOBJ) -o $(TEST)
 
 clean:
 	-$(RM) *~
@@ -21,9 +30,8 @@ clean:
 
 fclean:	clean
 	-$(RM) $(NAME)
-	-$(RM) test
+	-$(RM) $(TEST)
 
 re: fclean all
 
-submit: fclean
-	tar cvzf $(TARBALL) *
+tre: fclean test

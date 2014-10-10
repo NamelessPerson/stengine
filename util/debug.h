@@ -1,8 +1,8 @@
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
 
+#include <string>
 #include <iostream>
-#include <cstring>
 
 #define DEBUG_LOG(a,b) Debug::instance()->log(a,b)
 #define DEBUG_WARN(a,b) Debug::instance()->warn(a,b)
@@ -23,7 +23,7 @@ public:
 private:
 	Debug(){};
 	Debug(Debug const&){};
-	Debug& operator=(Debug const&){};
+	Debug& operator=(Debug const&){ return *_instance; };
 	static Debug* _instance;
 };
 

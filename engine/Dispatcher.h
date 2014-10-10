@@ -2,7 +2,6 @@
 #define _EVENT_BUS_H_
 
 #include <cstdlib>
-#include "ITickable.h"
 #include "DataStructs/DArray.h"
 #include "DataStructs/Queue.h"
 #include "SceneManager.h"
