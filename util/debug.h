@@ -7,6 +7,7 @@
 #define DEBUG_LOG(a,b) Debug::instance()->log(a,b)
 #define DEBUG_WARN(a,b) Debug::instance()->warn(a,b)
 #define DEBUG_ERR(a,b) Debug::instance()->err(a,b)
+#define DEBUG_UNIT(a,b) Debug::instance()->unit(a,b)
 
 using namespace std;
 
@@ -17,8 +18,9 @@ public:
 	void log(int, string);
 	void warn(int, string);
 	void err(int, string);
+	void unit(bool, string);
 	enum{
-		GAMEPLAY, DATASTRUCTS, DEBUG,
+		GAMEPLAY, DATASTRUCTS, DEBUG,UNIT
 	};
 private:
 	Debug(){};
@@ -45,6 +47,8 @@ void Debug::log(int channel, string msg){
 		case DEBUG:
 			cout<<"[DEBUG] ";
 			break;
+		case UNIT:
+			break;
 		default:
 			cout<<"[!!!INVALID CHANNEL!!!] ";
 			break;
@@ -53,14 +57,21 @@ void Debug::log(int channel, string msg){
 }
 
 void Debug::warn(int channel, string msg){
-	cout<<"==WARNING==";
-	DEBUG_LOG(channel, "yoo");
+	cout<<"\n====WARNING====\n-->";
+	DEBUG_LOG(channel, msg);
+	cout << endl;
 }
 
 void Debug::err(int channel, string msg){
-	cout<<"==!!ERROR!!==\n-->";
-	DEBUG_LOG(channel, "yoo");
-	cout<<"==!!ERROR!!=="<<endl;
+	cout<<"\n====!!ERROR!!====\n-->";
+	DEBUG_LOG(channel, msg);
+	cout << endl;
+}
+
+void Debug::unit(bool passed, string msg){
+	if(passed) cout << "[PASSED] - ";
+	else cout << "[FAILED] - ";
+	DEBUG_LOG(UNIT, msg);
 }
 
 #endif

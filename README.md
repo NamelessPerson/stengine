@@ -111,14 +111,14 @@ Comments
 
 Single and in-line comments with //.
 
-Multi-line comments with /* /**/
+Multi-line comments with /* */
 
 Documentation with
 
-		/**
+		/*
 		====================================================
 			Function/Class name
 
 		Description
 		====================================================
-		**/
+		*/

@@ -1,6 +1,7 @@
 #include "util/datastructs/darray.h"
 #include "util/datastructs/stack.h"
 #include "util/datastructs/queue.h"
+#include "util/datastructs/trie.h"
 #include "util/debug.h"
 /*#include "Dispatcher.h"
 #include "SceneManager.h"*/
@@ -93,6 +94,17 @@ void testQueue(){
 	else cout<<"[PASSED] Checking Size"<<endl;
 }
 
+void testTrie(){
+	Trie<int> t;
+	t.add("hello", 5);
+	t.add("mama", 6);
+	t.add("aaa", 7);
+	t.add("", 4);
+	DEBUG_UNIT((t.get("hello") == 5 && t.get("mama") == 6), "Adding and getting from Trie");
+	DEBUG_UNIT((t.get("") == 4), "Adding and getting with blank key");
+	DEBUG_UNIT((t.get("---") == 7), "Adding and getting with invalid key");
+}
+
 /*class dispatchTester{
 	Dispatcher d;
 };
@@ -110,6 +122,7 @@ int main(int argc, char const *argv[]){
 	testDArray();
 	testStack();
 	testQueue();
+	testTrie();
 
 	return 0;
 }
