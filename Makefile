@@ -25,12 +25,13 @@ clean:
 	-$(RM) *~
 	-$(RM) \#*
 	-$(RM) *.o
+	-$(RM) *.obj
 	-$(RM) *.core
 	-$(RM) *.stackdump
 
 fclean:	clean
-	-$(RM) $(NAME)
-	-$(RM) $(TEST)
+	-$(RM) *.exe
+	-$(RM) *.a
 
 re: fclean all
 

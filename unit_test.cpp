@@ -3,11 +3,12 @@
 #include "util/datastructs/queue.h"
 #include "util/datastructs/trie.h"
 #include "util/debug.h"
+#include "util/json/jsonparser.h"
 /*#include "Dispatcher.h"
 #include "SceneManager.h"*/
 
 #include <assert.h>
-#include <cstring>
+#include <string>
 #include <time.h>
 
 using namespace std;
@@ -105,6 +106,19 @@ void testTrie(){
 	DEBUG_UNIT((t.get("---") == 7), "Adding and getting with invalid key");
 }
 
+void testJson(){
+	JParser json_test("util/json/test.json");
+	DEBUG_UNIT((GET_JSTRING(json_test, "string") == "testing"), "Getting a Value");
+	DEBUG_UNIT((GET_JSTRING(json_test, "obj:object") == "yep"), "Getting from an object");
+	DEBUG_UNIT((*GET_JARR(json_test, "array")->get(0) == "1"), "Getting from an array");
+
+	cout << *GET_JARR(json_test, "array")->get(0) << endl;
+	cout << *GET_JARR(json_test, "array")->get(1) << endl;
+	cout << *GET_JARR(json_test, "array")->get(2) << endl;
+	cout << *GET_JARR(json_test, "array")->get(3) << endl;
+	cout << *GET_JARR(json_test, "array")->get(4) << endl;
+}
+
 /*class dispatchTester{
 	Dispatcher d;
 };
@@ -117,12 +131,11 @@ int main(int argc, char const *argv[]){
 
 	srand(time(0));
 
-	//testDispatcher();
-
-	testDArray();
-	testStack();
-	testQueue();
-	testTrie();
+	//testDArray();
+	//testStack();
+	//testQueue();
+	//testTrie();
+	testJson();
 
 	return 0;
 }

@@ -13,9 +13,8 @@ over a DArray.
 template <class E>
 class Stack{
 public:
-	Stack() = {};
+	Stack();
 	Stack(unsigned int size);
-	~Stack() = {};
 
 	bool push(E);
 	bool empty();
@@ -30,9 +29,21 @@ private:
 
 /*
 ==============================================
+Stack()
+
+Default Constructor
+==============================================
+*/
+template <class E>
+Stack<E>::Stack(){
+	
+}
+
+/*
+==============================================
 	Stack(unsigned int size)
 
-Constructs a Stack with defualt amount size
+Constructs a Stack with default amount size
 allocated.
 ==============================================
 */

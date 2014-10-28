@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
+#include "../debug.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ public:
 	bool add(E);
 
 	E remove(unsigned int);
+	bool remove(E);
 	E get(unsigned int);
 
 	void print();
@@ -152,7 +154,7 @@ bool DArray<E>::insert(E item, unsigned int index){
 	if(index > _length) return false;
 	if(_length == _allocated && !resize()) return false;
 
-	if(index != _length - 1) memmove(elements+index+1, elements+index, (_length-index)*sizeof(E));
+	if(index != _length) memmove(elements+index+1, elements+index, (_length-index)*sizeof(E));
 	elements[index] = item;
 	_length++;
 	return true;
@@ -208,6 +210,35 @@ E DArray<E>::remove(unsigned int index){
 	_length--;
 
 	return temp;
+}
+
+/*
+==============================================
+	E remove(E item)
+
+Removes an item from the array and shifts all
+proceeding objects down. Undefined and logged
+error if E is not in the array
+==============================================
+*/
+template<class E>
+bool DArray<E>::remove(E item){
+	int index = 0;
+
+	for(index = 0; index < _length; index++){
+		//index will be where the item is in the array.
+		if(elements[index] == item) break;
+	}
+
+	if(index >= _length){
+		DEBUG_WARN(Debug::DATASTRUCTS, "Trying to remove non-existant element.");
+		return false;
+	}
+
+	memmove(elements + index, elements + index + 1, (_length - index - 1)*sizeof(E));
+	_length--;
+
+	return true;
 }
 
 /*

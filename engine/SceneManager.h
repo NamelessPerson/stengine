@@ -1,8 +1,8 @@
 #ifndef _SCENE_MANAGER_H_
 #define _SCENE_MANAGER_H_
 
-#include "ISceneGraph.h"
-#include "DataStructs/DArray.h"
+#include "iscenegraph.h"
+#include "../util/datastructs/darray.h"
 
 class ITickable{
 public:
@@ -42,7 +42,7 @@ void SceneManager::tick(float dt){
 	int i;
 
 	for(i = 0; i < controllers.length(); i++)
-		(*(controllers.get(i)))->tick(dt);
+		controllers.get(i)->tick(dt);
 }
 
 void SceneManager::addTickable(ITickable* obj){
@@ -52,7 +52,7 @@ void SceneManager::addTickable(ITickable* obj){
 void SceneManager::removeTickable(ITickable* obj){
 	int i;
 	for(i = 0; i < controllers.length(); i++){
-		if((*(controllers.get(i))) == obj){
+		if(controllers.get(i) == obj){
 			controllers.remove(i);
 			//Should not be duplicates!!
 			return;

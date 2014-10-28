@@ -2,10 +2,10 @@
 	"string" : "testing",
 	"int" : 5,
 	"float" : 0.5,
-	"array" : [1,2,3,4,5],
 	"bool" : true,
-	"null" : null
-	{
-		"object":"yep"
-	}
+	"null" : null,
+	"obj" : {
+		"object":"yep",
+	},
+	"array" : [1,2,3,4,5],
 }

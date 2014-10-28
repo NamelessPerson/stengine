@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 
+//Macros to make logging easier
 #define DEBUG_LOG(a,b) Debug::instance()->log(a,b)
 #define DEBUG_WARN(a,b) Debug::instance()->warn(a,b)
 #define DEBUG_ERR(a,b) Debug::instance()->err(a,b)
@@ -11,6 +12,13 @@
 
 using namespace std;
 
+/*
+============================================================
+	Debug
+
+	Debug logger class. 
+============================================================
+*/
 class Debug{
 public:
 	static Debug* instance();
@@ -20,7 +28,7 @@ public:
 	void err(int, string);
 	void unit(bool, string);
 	enum{
-		GAMEPLAY, DATASTRUCTS, DEBUG,UNIT
+		GAMEPLAY, DATASTRUCTS, DEBUG, UNIT, UTIL
 	};
 private:
 	Debug(){};
@@ -46,6 +54,9 @@ void Debug::log(int channel, string msg){
 			break;
 		case DEBUG:
 			cout<<"[DEBUG] ";
+			break;
+		case UTIL:
+			cout << "[UTIL] ";
 			break;
 		case UNIT:
 			break;
