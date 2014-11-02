@@ -2,9 +2,9 @@
 #define _EVENT_BUS_H_
 
 #include <cstdlib>
-#include "DataStructs/DArray.h"
-#include "DataStructs/Queue.h"
-#include "SceneManager.h"
+#include "../util/datastructs/darray.h"
+#include "../util/datastructs/queue.h"
+#include "scenemanager.h"
 
 using namespace std;
 

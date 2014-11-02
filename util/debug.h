@@ -30,12 +30,25 @@ public:
 	enum{
 		GAMEPLAY, DATASTRUCTS, DEBUG, UNIT, UTIL
 	};
+
+	void setOutput(ostream*);
+	ostream* getOutput();
+
+	void mute(int channel);
+	void unMute(int channel);
+
 private:
-	Debug(){};
+	Debug();
 	Debug(Debug const&){};
 	Debug& operator=(Debug const&){ return *_instance; };
 	static Debug* _instance;
+	ostream* out;
+	bool muted[5];
 };
+
+Debug::Debug(){
+	out = &cout;
+}
 
 Debug* Debug::instance(){
 	if(!_instance){
@@ -45,44 +58,63 @@ Debug* Debug::instance(){
 }
 
 void Debug::log(int channel, string msg){
+	if(muted[channel]) return;
 	switch(channel){
 		case GAMEPLAY:
-			cout<<"[GAMEPLAY] ";
+			*out<<"[GAMEPLAY] ";
 			break;
 		case DATASTRUCTS:
-			cout<<"[DATASTRUCTS] ";
+			*out<<"[DATASTRUCTS] ";
 			break;
 		case DEBUG:
-			cout<<"[DEBUG] ";
+			*out<<"[DEBUG] ";
 			break;
 		case UTIL:
-			cout << "[UTIL] ";
+			*out << "[UTIL] ";
 			break;
 		case UNIT:
 			break;
 		default:
-			cout<<"[!!!INVALID CHANNEL!!!] ";
+			*out<<"[!!!INVALID CHANNEL!!!] ";
 			break;
 	}
-	cout<<msg<<endl;
+	*out<<msg<<endl;
 }
 
 void Debug::warn(int channel, string msg){
-	cout<<"\n====WARNING====\n-->";
+	if(muted[channel]) return;
+	*out<<"\n====WARNING====\n-->";
 	DEBUG_LOG(channel, msg);
-	cout << endl;
+	*out << endl;
 }
 
 void Debug::err(int channel, string msg){
-	cout<<"\n====!!ERROR!!====\n-->";
+	if(muted[channel]) return;
+	*out<<"\n====!!ERROR!!====\n-->";
 	DEBUG_LOG(channel, msg);
-	cout << endl;
+	*out << endl;
 }
 
 void Debug::unit(bool passed, string msg){
-	if(passed) cout << "[PASSED] - ";
-	else cout << "[FAILED] - ";
+	if(muted[UNIT]) return;
+	if(passed) *out << "[PASSED] - ";
+	else *out << "[FAILED] - ";
 	DEBUG_LOG(UNIT, msg);
 }
+
+void Debug::setOutput(ostream* newOutput){
+	out = newOutput;
+}
+ostream* Debug::getOutput(){
+	return out;
+}
+
+void Debug::mute(int channel){
+	muted[channel] = true;
+}
+void Debug::unMute(int channel){
+	muted[channel] = false;
+}
+
 
 #endif

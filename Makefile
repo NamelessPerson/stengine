@@ -15,6 +15,7 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	g++ $(OBJ) -o $(NAME) -lncurses
 
 unit: $(TEST)
 
