@@ -7,9 +7,9 @@
 
 class Tile : public IDrawable{
 public:
-	Tile(string _name, int x, int y, char character, string _color);
+	Tile(string _name, int x, int y, char character, short _color);
+	~Tile();
 	
-	SceneNode* getNode();
 	string getName();
 	
 	SceneNode node;
@@ -20,7 +20,7 @@ public:
 private:
 	string name;
 	char render_character;
-	string color;
+	short color;
 };
 
 #endif

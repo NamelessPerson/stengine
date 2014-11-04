@@ -145,12 +145,24 @@ DArray<string*>* JsonParser::getArr(ifstream &file){
 
 	while(c != ']'){
 		temp = new string();
-		*temp += c;
-		c = file.get();
-		
-		while(c != ',' && c != ']'){
+		//ITS A STRING
+		if(c == '"'){
+			c= file.get();
+			while(c != '"'){
+				*temp += c;
+				c = file.get();
+			}
+			c = file.get();
+		}
+		//Something else
+		else{
 			*temp += c;
 			c = file.get();
+			
+			while(c != ',' && c != ']'){
+				*temp += c;
+				c = file.get();
+			}
 		}
 		if(c == ',') c = file.get();
 		arr->add(temp);

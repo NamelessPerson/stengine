@@ -10,6 +10,7 @@ public:
 	GridActor();
 	GridActor(string _name);
 	GridActor(string _name, int x, int y);
+	~GridActor();
 	
 	SceneNode* getNode();
 	string getName();

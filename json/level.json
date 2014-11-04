@@ -3,30 +3,35 @@
 	"worldHeight": 100,
 
 	"defaultTile": "dirt",
+	"otherTiles":["grass","water","tree","mountain"],
 
 	"dirt": {
-		"color" : "brown",
+		"color" : "1",
 		"character" : "#",
 	},
 
 	"grass": {
-		"color" : "#F4A460",
+		"color" : "2",
 		"character" : "*",
+		"locations" : ["4,4"],
 	},
 
 	"water": {
-		"color" : "#F4A460",
+		"color" : "3",
 		"character" : "~",
+		"locations" : ["3,3"],
 	},
 
 	"tree": {
-		"color" : "#F4A460",
+		"color" : "2",
 		"character" : "T",
+		"locations" : ["2,2"],
 	},
 
 	"mountain": {
-		"color" : "#F4A460",
+		"color" : "1",
 		"character" : "^",
+		"locations" : ["5,6"],
 	},		
 
 	"orc": {

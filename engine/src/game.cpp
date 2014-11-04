@@ -42,27 +42,37 @@ void Game::render(){
 	DEBUG_LOG(Debug::ENGINE, "Entering the render method");
 	int i,j;
 	unsigned int k;
-	char c = ' ';
-	short color = 1;
+	char c;
+	short color;
+	int depth;
 	DArray<SceneNode*>* temp;
 
 	clear();
 	start_color();
-	init_color(7, 139, 69, 19);
-	init_pair(1, COLOR_BLUE, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
+	
+	init_pair(1, COLOR_BLACK, COLOR_GREEN);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_CYAN, COLOR_BLUE);
+	init_pair(4, COLOR_WHITE, COLOR_BLACK);
+	
 	attrset(COLOR_PAIR(1));
+	attrset(COLOR_PAIR(2));
+	attrset(COLOR_PAIR(3));
+	attrset(COLOR_PAIR(4));
 
 	for(j = 0; j<screen.height-4; j++){
 		move(j,1);
 		for(i = 0; i<screen.width-2; i++){
 			c = ' ';
 			color = 1;
+			depth = -1;
 			for(k = 0; k < temp->length(); k++){
 				temp = SceneManager::instance()->getColliders(i, j);
-				if(temp->get(k)->actor){
+				if(temp->get(k)->actor && temp->get(k)->actor->renderDepth() > depth){
 					c = temp->get(k)->actor->getCharacter();
 					color = temp->get(k)->actor->getColor();
+					//Only draw the top-most item
+					depth = temp->get(k)->actor->renderDepth();
 				}
 			}
 			addch(c | COLOR_PAIR(color));

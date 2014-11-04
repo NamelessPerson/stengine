@@ -38,7 +38,8 @@ clean:
 
 fclean:	clean
 	-$(RM) *.exe
-	-$(RM) *.a
+	-$(RM) $(NAME)
+	-$(RM) $(TEST)
 
 re: fclean all
 

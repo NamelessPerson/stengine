@@ -13,6 +13,7 @@ Level::Level(){
 void Level::init(){
 	JsonParser config;
 	int i,j;
+	unsigned int k,l;
 	DEBUG_LOG(Debug::ENGINE, "Level - Intializing Level");
 	config.parse("json/level.json");
 
@@ -26,7 +27,7 @@ void Level::init(){
 	//Fill in Tiles with default
 	string defaultTileName = GET_JSTRING(config, "defaulttile");
 	Trie<JsonNode*>* defaultTile = GET_JOBJ(config, defaultTileName);
-	string color = *defaultTile->get("color")->value;
+	short color = (short)stoi(*defaultTile->get("color")->value);
 	char character = (*defaultTile->get("character")->value)[0];
 
 	for(i = 0; i < width; i++){
@@ -35,7 +36,20 @@ void Level::init(){
 		}
 	}
 
-	//TODO Overwrite with other defined tiles
+	//TODO Generate other Tiles
+	DArray<string*>* tiles = GET_JARR(config, "othertiles");
+	DArray<string*>* current_tile;
+	string temp;
+	for(k = 0; k < tiles->length(); k++){
+		current_tile = GET_JARR(config, *tiles->get(k)+":locations");
+		for(l = 0; l < current_tile->length(); l++){
+			temp = *current_tile->get(l);
+			i = stoi(temp.substr(0, temp.find(',')));
+			j = stoi(temp.substr(temp.find(',')+1, temp.length()));
+			delete grid[getIndex(i,j,width)];
+			grid[getIndex(i,j,width)] = new Tile(*tiles->get(k),i,j, (GET_JSTRING(config, *tiles->get(k)+":character"))[0],stoi(GET_JSTRING(config, *tiles->get(k)+":color")));
+		}
+	}
 
 	DEBUG_LOG(Debug::ENGINE, "Level - Giving Tiles to SceneManager");
 	//Place tiles into SceneManager

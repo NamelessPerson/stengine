@@ -1,5 +1,9 @@
 #include "engine/actor/gridactor.h"
 
+GridActor::~GridActor(){
+	
+}
+
 GridActor::GridActor(){
 	name = "";
 	node.actor = this;
