@@ -1,0 +1,41 @@
+{
+	"worldWidth": 100,
+	"worldHeight": 100,
+
+	"defaultTile": "dirt",
+
+	"dirt": {
+		"color" : "brown",
+		"character" : "#",
+	},
+
+	"grass": {
+		"color" : "#F4A460",
+		"character" : "*",
+	},
+
+	"water": {
+		"color" : "#F4A460",
+		"character" : "~",
+	},
+
+	"tree": {
+		"color" : "#F4A460",
+		"character" : "T",
+	},
+
+	"mountain": {
+		"color" : "#F4A460",
+		"character" : "^",
+	},		
+
+	"orc": {
+		"color" : "#F4A460",
+		"character" : "O",
+	},
+
+	"dwarf": {
+		"color" : "#F4A460",
+		"character" : "D",
+	},
+}

@@ -28,7 +28,10 @@ Default constructor which instantiates 26 children
 */
 template <class E>
 TNode<E>::TNode(){
+	int i;
 	children = new TNode<E>*[26];
+	//Gotta clear junk out. Had some issues before
+	for(i = 0; i < 26; i++) children[i] = 0;
 }
 
 /*
@@ -127,6 +130,7 @@ void Trie<E>::add(string key, E data){
 
 	for(i = 0, c = key[i]; i < key.length(); i++, c = key[i]){
 		j = getTrieIndex(c);
+		if(curr->children[j]) DEBUG_LOG(Debug::DATASTRUCTS, "Node already exists at " + to_string(j));
 		if(!curr->children[j]) curr->children[j] = new TNode<E>();
 		curr = curr->children[getTrieIndex(c)];
 	}

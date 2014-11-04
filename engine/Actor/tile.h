@@ -1,15 +1,13 @@
-#ifndef _GRID_ACTOR_H_
-#define _GRID_ACTOR_H_
+#ifndef _TILE_H_
+#define _TILE_H_
 
 #include <string>
 #include "engine/scenemanager.h"
 #include "actor.h"
 
-class GridActor : public ICollidable, public IDrawable{
+class Tile : public IDrawable{
 public:
-	GridActor();
-	GridActor(string _name);
-	GridActor(string _name, int x, int y);
+	Tile(string _name, int x, int y, char character, string _color);
 	
 	SceneNode* getNode();
 	string getName();
@@ -21,10 +19,8 @@ public:
 	short getColor();
 private:
 	string name;
-	string type;
 	char render_character;
 	string color;
-	bool selectable = false;
 };
 
 #endif

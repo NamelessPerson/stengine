@@ -1,14 +1,18 @@
 NAME = main
 TEST = test
 
-SRC = main.cpp
-TSRC = unit_test.cpp
+ENGINE = level.cpp game.cpp scenemanager.cpp tile.cpp gridactor.cpp \
+fixedgrid.cpp
+
+UTIL = debug.cpp jsonparser.cpp
+SRC = main.cpp $(addprefix util/src/,$(UTIL)) $(addprefix engine/src/,$(ENGINE))
+TSRC = unit_test.cpp $(addprefix util/src/,$(UTIL)) $(addprefix engine/src/,$(ENGINE))
 OBJ = $(SRC:.cpp=.o)
 TOBJ = $(TSRC:.cpp=.o)
 
 CC = g++
 CXX = g++
-CXXFLAGS += -std=c++11 -Wall -Werror
+CXXFLAGS += -std=c++11 -Wall -Werror -I.
 LDFLAGS += -Wall -Werror
 RM = rm -f
 
@@ -29,6 +33,8 @@ clean:
 	-$(RM) *.obj
 	-$(RM) *.core
 	-$(RM) *.stackdump
+	-$(RM) util/src/*.o
+	-$(RM) engine/src/*.o
 
 fclean:	clean
 	-$(RM) *.exe
