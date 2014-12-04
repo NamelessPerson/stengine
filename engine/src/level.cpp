@@ -1,6 +1,7 @@
 #include "engine/level.h"
 #include "engine/fixedgrid.h"
 #include "engine/actor/tile.h"
+#include "engine/controller/dwarfcontroller.h"
 
 #include "util/debug.h"
 #include "util/json/jsonparser.h"
@@ -58,7 +59,7 @@ void Level::init(){
 			SceneManager::instance()->addSceneNode(&grid[getIndex(i, j, width)]->node);
 		}
 	}
-
+	SceneManager::instance()->addTickable(new DwarfController());
 }
 
 int getIndex(int x, int y, int width){

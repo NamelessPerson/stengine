@@ -15,4 +15,8 @@ public:
 	virtual ~IDrawable() {};
 };
 
+class ISelectable{
+
+};
+
 #endif

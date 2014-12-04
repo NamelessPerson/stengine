@@ -2,11 +2,11 @@ NAME = main
 TEST = test
 
 ENGINE = level.cpp game.cpp scenemanager.cpp tile.cpp gridactor.cpp \
-fixedgrid.cpp
+fixedgrid.cpp dwarfcontroller.cpp dispatcher.cpp
 
 UTIL = debug.cpp jsonparser.cpp
 SRC = main.cpp $(addprefix util/src/,$(UTIL)) $(addprefix engine/src/,$(ENGINE))
-TSRC = unit_test.cpp $(addprefix util/src/,$(UTIL)) $(addprefix engine/src/,$(ENGINE))
+TSRC = unit_test.cpp $(addprefix util/src/,$(UTIL))
 OBJ = $(SRC:.cpp=.o)
 TOBJ = $(TSRC:.cpp=.o)
 

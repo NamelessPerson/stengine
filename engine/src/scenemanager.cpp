@@ -1,4 +1,5 @@
 #include "engine/scenemanager.h"
+#include "util/debug.h"
 
 SceneManager* SceneManager::_instance = 0;
 
@@ -7,6 +8,7 @@ SceneManager::SceneManager(){
 }
 
 void SceneManager::tick(float dt){
+	DEBUG_LOG(Debug::ENGINE, "SceneManager - Entering Tick");
 	unsigned int i;
 
 	for(i = 0; i < controllers.length(); i++)

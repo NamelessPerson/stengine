@@ -6,7 +6,11 @@
 
 class ITickable{
 public:
+	virtual void pretick(float dt) = 0;
 	virtual void tick(float dt) = 0;
+	virtual void posttick(float dt) = 0;
+protected:
+	clock_t delta;
 };
 
 class SceneManager{

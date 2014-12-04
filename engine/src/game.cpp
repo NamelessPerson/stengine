@@ -16,6 +16,7 @@ Game::Game(){
 	screen.y = 0;
 	screen.width = 1;
 	screen.height = 1;
+	delta = clock();
 }
 
 void Game::play(){
@@ -35,7 +36,7 @@ void Game::play(){
 void Game::update(){
 	DEBUG_LOG(Debug::ENGINE, "Entering the update method");
 	getmaxyx(stdscr, screen.height, screen.width);
-	//SceneManager::instance()->tick(0);
+	SceneManager::instance()->tick(clock());
 }
 
 void Game::render(){
@@ -66,8 +67,8 @@ void Game::render(){
 			c = ' ';
 			color = 1;
 			depth = -1;
+			temp = SceneManager::instance()->getColliders(i, j);
 			for(k = 0; k < temp->length(); k++){
-				temp = SceneManager::instance()->getColliders(i, j);
 				if(temp->get(k)->actor && temp->get(k)->actor->renderDepth() > depth){
 					c = temp->get(k)->actor->getCharacter();
 					color = temp->get(k)->actor->getColor();

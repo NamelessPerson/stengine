@@ -43,4 +43,9 @@
 		"color" : "#F4A460",
 		"character" : "D",
 	},
+	"buildings": {
+		"hall": "1,0",
+		"smith": "1,0",
+		"apoth": "1,0",
+	},
 }

@@ -5,7 +5,7 @@
 #include "engine/scenemanager.h"
 #include "actor.h"
 
-class GridActor : public ICollidable, public IDrawable{
+class GridActor : public ICollidable, public IDrawable, public ISelectable{
 public:
 	GridActor();
 	GridActor(string _name);
@@ -20,12 +20,16 @@ public:
 	int renderDepth();
 	char getCharacter();
 	short getColor();
-private:
+//private:
 	string name;
 	string type;
+
 	char render_character;
 	string color;
 	bool selectable = false;
+
+	float thirst, sleep, gold;
+	int wallet;
 };
 
 #endif

@@ -4,17 +4,12 @@
 #include "util/datastructs/trie.h"
 #include "util/debug.h"
 #include "util/json/jsonparser.h"
-/*#include "Dispatcher.h"
-#include "SceneManager.h"*/
 
 #include <assert.h>
 #include <string>
 #include <time.h>
 
 using namespace std;
-
-//SceneManager* SceneManager::_instance = 0;
-Debug* Debug::_instance = 0;
 
 void testDArray(){
 	DArray<int> arr;
@@ -96,6 +91,8 @@ void testQueue(){
 }
 
 void testTrie(){
+	cout<<"\n==== Trie ====\n"<<endl;
+
 	Trie<int> t;
 	t.add("hello", 5);
 	t.add("mama", 6);
@@ -107,16 +104,12 @@ void testTrie(){
 }
 
 void testJson(){
-	JParser json_test("util/json/test.json");
+	cout<<"\n==== Json ====\n"<<endl;
+
+	JsonParser json_test("util/json/test.json");
 	DEBUG_UNIT((GET_JSTRING(json_test, "string") == "testing"), "Getting a Value");
 	DEBUG_UNIT((GET_JSTRING(json_test, "obj:object") == "yep"), "Getting from an object");
 	DEBUG_UNIT((*GET_JARR(json_test, "array")->get(0) == "1"), "Getting from an array");
-
-	cout << *GET_JARR(json_test, "array")->get(0) << endl;
-	cout << *GET_JARR(json_test, "array")->get(1) << endl;
-	cout << *GET_JARR(json_test, "array")->get(2) << endl;
-	cout << *GET_JARR(json_test, "array")->get(3) << endl;
-	cout << *GET_JARR(json_test, "array")->get(4) << endl;
 }
 
 /*class dispatchTester{
@@ -131,10 +124,13 @@ int main(int argc, char const *argv[]){
 
 	srand(time(0));
 
-	//testDArray();
-	//testStack();
-	//testQueue();
-	//testTrie();
+	Debug::instance()->mute(Debug::UTIL);
+	Debug::instance()->mute(Debug::DATASTRUCTS);
+
+	testDArray();
+	testStack();
+	testQueue();
+	testTrie();
 	testJson();
 
 	return 0;

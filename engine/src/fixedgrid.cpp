@@ -45,6 +45,7 @@ DArray<SceneNode*>* FixedGrid::getColliders(SceneNode* node){
 	return &graph[getIndex(node->x, node->y)];
 }
 DArray<SceneNode*>* FixedGrid::getColliders(int x, int y){
+	DEBUG_LOG(Debug::ENGINE, "Returning colliders at "+to_string(x)+", "+to_string(y));
 	return &graph[getIndex(x,y)];
 }
 //Not implemented since they're not needed for simulation. TODO later
