@@ -1,3 +1,12 @@
+Info: This directory was for an Intro to Game Developement class in which we built a simple game engine and then used ncurses to implement the engine into a game. Directory was originally hosted on bitbucket and mirrored into here.
+
+Built entirely in C++, the engine includes: 
+SceneGraph
+EventHander
+JSON Parser
+Data Structures such as a Dynamic Array
+and Actors/Controllers. 
+
 Josh Phillips Coding Standard
 ==================================================================================================
 v1.0
