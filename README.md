@@ -5,7 +5,9 @@ SceneGraph
 EventHander
 JSON Parser
 Data Structures such as a Dynamic Array
-and Actors/Controllers. 
+and Actors/Controllers.
+
+If you would like to build on Linux instal libncurses-dev and use make. Current version just has a Dwarf(D) moving across the screen
 
 Josh Phillips Coding Standard
 ==================================================================================================

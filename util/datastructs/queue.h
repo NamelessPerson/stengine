@@ -1,7 +1,7 @@
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
 
-#include "Node.h"
+#include "node.h"
 
 template<class E>
 class Queue{

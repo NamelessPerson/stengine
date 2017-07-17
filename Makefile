@@ -12,7 +12,7 @@ TOBJ = $(TSRC:.cpp=.o)
 
 CC = g++
 CXX = g++
-CXXFLAGS += -std=c++11 -Wall -Werror -I.
+CXXFLAGS += -std=c++0x -Wall -Werror -I.
 LDFLAGS += -Wall -Werror
 RM = rm -f
 
