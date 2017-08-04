@@ -1,5 +1,10 @@
-## Makefile Conventions
-#----------------------
+#----------------------------------------------------------
+# TERMINAL SNAKE
+# 
+# This makefile compiles the snake game which is dependant
+# on the STEngine and STUtil Libraries. Suggested to use
+# top level makefile
+#----------------------------------------------------------
 
 NAME 		= snake
 

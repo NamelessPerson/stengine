@@ -1,13 +1,12 @@
-Info: This directory was for an Intro to Game Developement class in which we built a simple game engine and then used ncurses to implement the engine into a game. Directory was originally hosted on bitbucket and mirrored into here.
+This directory was originally made for CS-585 Intro to Game Developement at Stevens Institute of Technology.
+It is currently being restructured and remade for portfolio purposes.
 
-Built entirely in C++, the engine includes: 
-SceneGraph
-EventHander
-JSON Parser
-Data Structures such as a Dynamic Array
-and Actors/Controllers.
+If you are viewing it currently, please look in the _old folder for original code. 
+It should be buildable on any linux with libncureses-dev installed.
+The buildable version currently just has a Dwarf(D) moving across the screen
+You can use the make in the _old until I finish moving everything around for a cleaner setup
 
-If you would like to build on Linux instal libncurses-dev and use make. Current version just has a Dwarf(D) moving across the screen
+The coding standard below was a class requirement and can be ignored.
 
 Josh Phillips Coding Standard
 ==================================================================================================
