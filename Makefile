@@ -1,14 +1,25 @@
-# For now use snake/make
+SNAKE = snake/
+ENGINE = stengine/
+MAKEFLAGS += --no-print-directory
 
-# SNAKE = snake
-# SNAKESRC = snake/src/main.cpp
-# SNAKEOBJ = $(SNAKESRC:.cpp=.o)
+all: snake
 
-# CXX = g++
-# CXXFLAGS += -std=c++0x -Wall -Werror -I.
-# LDFLAGS += -Wall -Werror
-# RM = rm -f
+.PHONY: snake
+snake: engine
+	$(MAKE) -C $(SNAKE)
 
-# all: snake
+.PHONY: engine
+engine:
+	$(MAKE) -C $(ENGINE)
 
-# snake: 
+clean:
+	$(MAKE) -C $(SNAKE) clean
+	$(MAKE) -C $(ENGINE) clean
+
+fclean:
+	$(MAKE) -C $(SNAKE) fclean
+	$(MAKE) -C $(ENGINE) fclean
+
+
+run:
+	./snake/snake
