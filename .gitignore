@@ -1,2 +1,5 @@
 *.o
 */bin/
+*/testrun
+snake/snake
+*.a
