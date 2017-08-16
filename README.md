@@ -1,15 +1,33 @@
-This directory was originally made for CS-585 Intro to Game Developement at Stevens Institute of Technology.
-It is currently being restructured and remade for portfolio purposes.
+# Simple Terminal Engine
 
-changelog
-Created new Debug logging system - stutil/debug.h
+This repository is for a simple game engine, utilities, and example games which render in a linux terminal using ncurses. <br>
+Originally this was for a game development class but I am now revamping it piece by piece. <br>
+You can see the original code located in [_old](./_old) but I would rather you look at the newer things <br> 
+
+## Usage
+The stengine build system requires linux with `g++` and `libncurses-dev` installed <br>
+In the future I will include a Visual Studio Solution for building on windows <br>
+<br>
+The build system can be used entirely from the root<br>
+Currently the best way to run the new project is using:
+```
+make util test
+````
+This will run the simple unit tests for the utilities library.
+
+## Changelog
+
+##### Aug 15
+Finished the new and vastly improved Debug logging system. <br>
+New system allows users to create custon channels with custom output locations to help manage debug messages <br>
+See [debug.h](./stutil/include/stutil/debug.h) and [debug.cpp](./stutil/src/debug.cpp) or look at the [tests](./stutil/test.cpp) to see it being utilized.
+
+##### Aug 9
 Setup build system
-Started new project
 
+##### Aug 4
+Started revamp of project
 
-_old
----
-If you are viewing it currently, please look in the _old folder for original code. 
-It should be buildable on any linux with libncureses-dev installed.
+## _old
+The original code should still be buildable on a linux system using the makefile. <br>
 The buildable version currently just has a Dwarf(D) moving across the screen
-You can use the make in the _old until I finish moving everything around for a cleaner setup
