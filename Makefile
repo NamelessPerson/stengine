@@ -1,25 +1,21 @@
 SNAKE = snake/
 ENGINE = stengine/
-MAKEFLAGS += --no-print-directory
+UTIL = stutil/
+MAKEFLAGS += --no-print-directory --ignore-errors
+MAKECMDGOALS := $(filter-out $(firstword $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
-all: snake
+all: util engine snake
 
 .PHONY: snake
-snake: engine
-	$(MAKE) -C $(SNAKE)
+snake:
+	@$(MAKE) -C $(SNAKE) $(MAKECMDGOALS)
 
 .PHONY: engine
 engine:
-	$(MAKE) -C $(ENGINE)
+	@$(MAKE) -C $(ENGINE) $(MAKECMDGOALS) MAKEFLAGS= 
 
-clean:
-	$(MAKE) -C $(SNAKE) clean
-	$(MAKE) -C $(ENGINE) clean
+.PHONY: util
+util:
+	@$(MAKE) -C $(UTIL) $(MAKECMDGOALS) MAKEFLAGS= 
 
-fclean:
-	$(MAKE) -C $(SNAKE) fclean
-	$(MAKE) -C $(ENGINE) fclean
-
-
-run:
-	./snake/snake
+%: ;

@@ -1,9 +1,10 @@
-#include <iostream>
 #include <stengine/engine.h>
 
-int main(){
-	// std::cout << "Hello World" << std::endl;
-	print("Hello World");
-
+int main(int argc, const char argv[]){
+	/*
+	instantiate engine with graph
+	add everything to graph
+	*/
+	
 	return 0;
 }
