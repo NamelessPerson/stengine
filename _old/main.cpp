@@ -8,6 +8,7 @@
 
 int main(){
 	Debug::instance()->setOutput(new ofstream("log.log", std::ofstream::out));
+	initCurses();
 	
 	Game g;
 	g.play();

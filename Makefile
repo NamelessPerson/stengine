@@ -12,10 +12,10 @@ snake:
 
 .PHONY: engine
 engine:
-	@$(MAKE) -C $(ENGINE) $(MAKECMDGOALS) MAKEFLAGS= 
+	@$(MAKE) -C $(ENGINE) $(MAKECMDGOALS) 
 
 .PHONY: util
 util:
-	@$(MAKE) -C $(UTIL) $(MAKECMDGOALS) MAKEFLAGS= 
+	@$(MAKE) -C $(UTIL) $(MAKECMDGOALS) 
 
 %: ;

@@ -17,6 +17,12 @@ This will run the simple unit tests for the utilities library.
 
 ## Changelog
 
+##### Aug 25
+Moved everything into a namespace <br>
+Finished first pass at an event system. See [events.h](./stutil/include/stutil/events.h) and [events.cpp](./stutil/src/events.cpp) <br>
+You can see an example use in the [tests](./stutil/test.cpp) <br>
+Possible later extension would be passing constructed Event objects to be able to include information about the event <br>
+
 ##### Aug 15
 Finished the new and vastly improved Debug logging system. <br>
 New system allows users to create custon channels with custom output locations to help manage debug messages <br>

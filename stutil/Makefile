@@ -8,7 +8,7 @@ NAME 		= stutil
 OUTPUT 		= $(addprefix lib/lib, $(addsuffix .a, $(NAME)))
 TEST 		= testrun
 
-SRC_CPP 	= debug.cpp
+SRC_CPP 	= debug.cpp events.cpp
 SRC_DIR 	= src/
 OUTPUT_DIR 	= bin/
 
@@ -41,6 +41,7 @@ $(TEST): $(OUTPUT) $(TEST_SRC)
 
 clean:
 	$(RM) $(OBJ)
+	$(RM) *.log
 
 fclean: clean
 	$(RM) $(OUTPUT)

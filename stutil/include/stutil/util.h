@@ -2,6 +2,6 @@
 #define _ST_UTIL_H_
 
 #include "stutil/debug.h"
-#include "stutil/string.h"
+#include "stutil/events.h"
 
 #endif
