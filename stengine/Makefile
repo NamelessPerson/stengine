@@ -8,16 +8,17 @@ NAME 		= stengine
 OUTPUT 		= $(addprefix lib/lib, $(addsuffix .a, $(NAME)))
 TEST 		= testrun
 
-SRC_CPP 	= print.cpp
+SRC_CPP 	= engine.cpp
 SRC_DIR 	= src/
 OUTPUT_DIR 	= bin/
+INCLUDE_DIR	= include/
 
 SRC 		= $(addprefix $(SRC_DIR), $(SRC_CPP))
 OBJ 		= $(addprefix $(OUTPUT_DIR), $(SRC_CPP:.cpp=.o))
 TEST_SRC	= test.cpp
 
-CXX 		= g++
-CXXFLAGS 	+= -std=c++0x -Wall -Werror -I./include -I../stutil/include -g
+CXX 		= g++-7
+CXXFLAGS 	+= -std=c++0x -Wall -Werror -I$(INCLUDE_DIR) -I../stutil/include -g
 LDFLAGS 	+= -Wall -Werror -L../stutil/lib -lstutil
 TEST_LDFLAGS= -Llib/ -lstengine
 RM 			= rm -f -d
@@ -28,7 +29,7 @@ all: $(OUTPUT)
 $(OUTPUT): $(OBJ)
 	ar -rcs $(OUTPUT) $(OBJ)
 
-$(OUTPUT_DIR)%.o: $(SRC_DIR)%.cpp
+$(OUTPUT_DIR)%.o: $(SRC_DIR)%.cpp $(INCLUDE_DIR)$(NAME)/%.h
 	@mkdir -p $(@D)
 	$(CXX) $< -c $(CXXFLAGS) -o $@
 
@@ -36,7 +37,7 @@ $(OUTPUT_DIR)%.o: $(SRC_DIR)%.cpp
 test: $(TEST)
 
 $(TEST): $(OUTPUT) $(TEST_SRC)
-	g++ $(TEST_SRC) -o $(TEST) $(CXXFLAGS) $(LDFLAGS) $(TEST_LDFLAGS)
+	$(CXX) $(TEST_SRC) -o $(TEST) $(CXXFLAGS) $(LDFLAGS) $(TEST_LDFLAGS)
 	./$(TEST)
 
 clean:

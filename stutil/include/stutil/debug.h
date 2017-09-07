@@ -81,12 +81,12 @@ namespace STUtil {
 		log				- Writes a message to the default channel.
 		------------------------------------------------------------
 		*/
+		template<typename T>
+		static void		log( const T messsage );
 		static bool		addChannel( const std::string channelName );
 		static bool		addChannel( const std::string channelName, std::ostream& output );
 		static void		setDefault( std::ostream& output );
 		static Channel&	channel( const std::string channelName );
-		template<typename T>
-		static void		log( const T messsage );
 
 	private:
 		Debug();

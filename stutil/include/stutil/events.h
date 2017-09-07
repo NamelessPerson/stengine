@@ -22,13 +22,13 @@ namespace STUtil {
 	You can register a listener using:
 
 		Dispatcher dispatch;
-		dispatch.addListener( MyEvent::StaticID(), myListener );
+		dispatch.addListener( MyEvent::ID(), myListener );
 	============================================================
 	*/
 
 	typedef unsigned int EventID;
 
-	static EventID nextID() {
+	inline static EventID nextID() {
 		static EventID _nextID = 0;
 		return _nextID++;
 	}
@@ -42,7 +42,7 @@ namespace STUtil {
 		static EventID _id;
 
 	public:
-		static EventID StaticID() {
+		static EventID ID() {
 			return _id;
 		}
 

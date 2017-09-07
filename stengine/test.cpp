@@ -1,42 +1,47 @@
 #include <stengine/engine.h>
-#include <stutil/util.h>
+#include <thread>
+#include <chrono>
 
-using namespace STUtil;
+using namespace STEngine;
 
-class IEventListener {
+class TestComponent : public IComponent {
 public:
-	virtual void onEvent() = 0;
-};
+	static const ComponentID ID;
 
-class ListenerOne : public virtual IEventListener {
-public:
-	ListenerOne() {
-		Debug::log( "One" );
+	ComponentID getID() {
+		return ID;
 	}
-	virtual void onEvent() = 0;
-};
 
-class ListenerTwo : public virtual IEventListener {
-public:
-	ListenerTwo() {
-		Debug::log( "Two" );
-	}
-	virtual void onEvent() = 0;
-};
-
-class Object : public ListenerOne, public ListenerTwo {
-public:
-	Object() {
-		Debug::log( "Object" );
-	}
-	void onEvent() {
-		Debug::log( "Event" );
+	void update(){
+		Debug::log("TestComponent Update");
 	}
 };
+const ComponentID TestComponent::ID = nextID();
+
+class TestObject : public GameObject {
+public:
+	TestObject() {
+		addComponent<TestComponent>();
+	}
+	
+	void update() {
+		Debug::log( "Game Object Location: " );
+		Debug::log( _position.x );
+	}
+};
+
 
 int main() {
-	Object obj;
-	obj.onEvent();
+	GameManager::init();
+	GameManager::addObject( new TestObject() );
+
+	while( 1 ) {
+		GameManager::update();
+		GameManager::render();
+		std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
+
+		return 0;
+	}
 
 	return 0;
 }

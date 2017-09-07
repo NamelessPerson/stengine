@@ -7,6 +7,11 @@ Dispatcher::Dispatcher() {
 }
 
 Dispatcher::~Dispatcher() {
+	//Clear out allocated sets first
+	for(auto iter = _listeners->begin(); iter != _listeners->end(); ++iter){
+		delete iter->second;
+	}
+	
 	delete _listeners;
 }
 

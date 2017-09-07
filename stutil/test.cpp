@@ -22,7 +22,7 @@ void testDebugger() {
 	file << "Opening file for debugging" << std::endl;
 
 	std::cout << "============================================================" << std::endl;
-	std::cout << "Testing Debug System" << std::endl;
+	std::cout << "\tTesting Debug System" << std::endl;
 	std::cout << "============================================================" << std::endl;
 	std::cout << std::endl;
 
@@ -58,9 +58,9 @@ class FakeTestEvent : public Event<FakeTestEvent> {};
 class TestListener : public IEventListener {
 public:
 	void onEvent( EventID event ) {
-		if( event == TestEvent::StaticID() )
+		if( event == TestEvent::ID() )
 			Debug::log( "TestEvent Happened in TestListener" );
-		else if( event == TestEvent2::StaticID() )
+		else if( event == TestEvent2::ID() )
 			Debug::log( "TestEvent2 Happened in TestListener" );
 	}
 };
@@ -68,33 +68,34 @@ public:
 class TestListener2 : public IEventListener {
 public:
 	void onEvent( EventID event ) {
-		if( event == TestEvent::StaticID() )
+		if( event == TestEvent::ID() )
 			Debug::log( "TestEvent Happened in TestListener2" );
-		else if( event == TestEvent2::StaticID() )
+		else if( event == TestEvent2::ID() )
 			Debug::log( "TestEvent2 Happened in TestListener2" );
 	}
 };
 
 void testEvents() {
-	Dispatcher dispatch;
+	Dispatcher* dispatch = new Dispatcher();
 	TestListener* test = new TestListener();
 	TestListener2* test2 = new TestListener2();
 
 	std::cout << "============================================================" << std::endl;
-	std::cout << "Testing Event System" << std::endl;
+	std::cout << "\tTesting Event System" << std::endl;
 	std::cout << "============================================================" << std::endl;
 	std::cout << std::endl;
-	
-	dispatch.addListener( TestEvent::StaticID(), test );
-	dispatch.addListener( TestEvent::StaticID(), test2 );
-	dispatch.addListener( TestEvent2::StaticID(), test2 );
-	dispatch.addListener( TestEvent2::StaticID(), test );
-	
-	dispatch.dispatch( TestEvent::StaticID() );
-	dispatch.dispatch( TestEvent2::StaticID() );
-	dispatch.removeListener(TestEvent::StaticID(), test2);
-	dispatch.dispatch( TestEvent::StaticID() );
-	dispatch.dispatch( TestEvent2::StaticID() );
-	dispatch.dispatch( FakeTestEvent::StaticID() );
 
+	dispatch->addListener( TestEvent::ID(), test );
+	dispatch->addListener( TestEvent::ID(), test2 );
+	dispatch->addListener( TestEvent2::ID(), test2 );
+	dispatch->addListener( TestEvent2::ID(), test );
+
+	dispatch->dispatch( TestEvent::ID() );
+	dispatch->dispatch( TestEvent2::ID() );
+	dispatch->removeListener( TestEvent::ID(), test2 );
+	dispatch->dispatch( TestEvent::ID() );
+	dispatch->dispatch( TestEvent2::ID() );
+	dispatch->dispatch( FakeTestEvent::ID() );
+
+	delete dispatch;
 }

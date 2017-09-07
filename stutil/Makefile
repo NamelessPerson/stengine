@@ -16,8 +16,8 @@ SRC 		= $(addprefix $(SRC_DIR), $(SRC_CPP))
 OBJ 		= $(addprefix $(OUTPUT_DIR), $(SRC_CPP:.cpp=.o))
 TEST_SRC	= test.cpp
 
-CXX 		= g++
-CXXFLAGS 	+= -std=c++0x -Wall -Werror -I./include -g
+CXX 		= g++-7
+CXXFLAGS 	+= -std=c++14 -Wall -Werror -I./include -g
 LDFLAGS 	+= -Wall -Werror
 TEST_LDFLAGS= -Llib/ -lstutil
 RM 			= rm -f -d
@@ -36,7 +36,7 @@ $(OUTPUT_DIR)%.o: $(SRC_DIR)%.cpp
 test: $(TEST)
 
 $(TEST): $(OUTPUT) $(TEST_SRC)
-	g++ $(TEST_SRC) -o $(TEST) $(CXXFLAGS) $(LDFLAGS) $(TEST_LDFLAGS)
+	$(CXX) $(TEST_SRC) -o $(TEST) $(CXXFLAGS) $(LDFLAGS) $(TEST_LDFLAGS)
 	./$(TEST)
 
 clean:
