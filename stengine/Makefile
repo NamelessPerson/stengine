@@ -8,7 +8,7 @@ NAME 		= stengine
 OUTPUT 		= $(addprefix lib/lib, $(addsuffix .a, $(NAME)))
 TEST 		= testrun
 
-SRC_CPP 	= engine.cpp
+SRC_CPP 	= engine.cpp fixedgrid.cpp
 SRC_DIR 	= src/
 OUTPUT_DIR 	= bin/
 INCLUDE_DIR	= include/
