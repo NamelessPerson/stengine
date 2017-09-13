@@ -32,6 +32,8 @@ $(OUTPUT_DIR)%.o: $(SRC_DIR)%.cpp
 clean:
 	$(RM) $(OBJ)
 
+test: all
+
 fclean: clean
 	$(RM) $(OUTPUT)
 	$(RM) -r $(OUTPUT_DIR)

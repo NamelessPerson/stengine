@@ -20,7 +20,7 @@ void FixedGridGraph::addCollider( Collider* obj ) {
 	if( dynamic_cast<GridSpaceCollider*>( obj ) )
 		_graph[obj->parent->position.x + ( obj->parent->position.y * _height )].push_back( dynamic_cast<GridSpaceCollider*>( obj ) );
 	else
-		Debug::log( "Error" );
+		Debug::err << "Error adding collider" ;
 }
 void FixedGridGraph::removeCollider( Collider* obj ) {}
 void FixedGridGraph::update() {

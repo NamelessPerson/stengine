@@ -11,7 +11,7 @@ namespace STEngine {
 		Redefinitions and forward declarations
 	------------------------------------------------------------
 	*/
-	typedef STUtil::Debug Debug; //Makes debugging easier
+	using namespace STUtil;
 	class ISceneGraph; //defined in -----.h
 	class GameObject; //Forward Declaration for Parent pointer
 	class Collider; //Forward Declaration for Parent pointer
@@ -33,13 +33,13 @@ namespace STEngine {
 				return ID;
 			}
 		};
-		const ComponentID MyComponent::ID = nextID();
+		const ComponentID MyComponent::ID = nextComponenetID();
 
 	============================================================
 	*/
 	typedef unsigned int ComponentID;
 
-	inline static ComponentID nextID() {
+	inline static ComponentID nextComponentID() {
 		static ComponentID _nextID = 0;
 		return _nextID++;
 	}
@@ -106,6 +106,8 @@ namespace STEngine {
 		virtual void addCollider( Collider* obj ) 		= 0;
 		virtual void removeCollider( Collider* obj )	= 0;
 		virtual void update()							= 0;
+
+	private:
 	};
 
 	/*

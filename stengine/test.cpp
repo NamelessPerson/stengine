@@ -20,10 +20,10 @@ public:
 	}
 
 	void onCollision(const Collider* col){
-		Debug::log("Collision Happened");
+		Debug::log << "Collision Happened\n";
 	}
 };
-const ComponentID TestComponent::ID = nextID();
+const ComponentID TestComponent::ID = nextComponentID();
 
 int main() {
 	int loops = 0;

@@ -3,7 +3,7 @@
 This repository is for a simple game engine, utilities, and example games which render in a linux terminal using ncurses. <br>
 Originally this was for a game development class but I am now revamping it piece by piece. <br>
 <!-- [SimpleINI Header](./include/simpleini/simpleini.h) is borrowed from Brodie Thiesfield and the original project can be found [here](https://github.com/brofield/simpleini). <br> -->
-You can see the original code located in [_old](./_old) but I would rather you look at the newer things <br> 
+You can see the original code located in [\_old](./_old) but I would rather you look at the newer things <br>
 
 ## Usage
 The stengine build system requires linux with `g++-7` and `libncurses-dev` installed <br>
@@ -11,12 +11,29 @@ In the future I will include a Visual Studio Solution for building on windows <b
 <br>
 The build system can be used entirely from the root<br>
 Currently the best way to run the new project is using:
+```bash
+make util test
+make engine test
 ```
-make util testw
-````
 This will run the simple unit tests for the utilities library.
 
+## Todo
+Current planned action items before next version
+
+- Improved Debugging System
+- Settings Manager
+- Input Manager
+- Ncurses Rendering System
+- Snake Example game
+
 ## Changelog
+
+##### Sept 13
+Huge improvements to [Debug](./stutil/include/stutil/debug.h) system. Now works similar to the standard output:
+```cpp
+Debug::log << "This is a " << " good example " << std::endl;
+```
+See the full demonstration in the [tests](./stutil/test.cpp)
 
 ##### Sept 8
 Implemented super simple [SceneGraph](./stengine/include/stengine/fixedgrid.h) which uses a grid of vectors to organize data <br>

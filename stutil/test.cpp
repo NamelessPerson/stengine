@@ -8,10 +8,11 @@
 using namespace STUtil;
 
 void testDebugger();
+void testNewDebugger();
 void testEvents();
 
 int main() {
-	// testDebugger();
+	testDebugger();
 	testEvents();
 
 	return 0;
@@ -27,28 +28,28 @@ void testDebugger() {
 	std::cout << std::endl;
 
 
-	Debug::log( "Logging to default channel" );
+	Debug::log << "Logging to default channel: " << std::endl; //std::endl;
+	Debug::log.muted = true;
+	Debug::log << "Logging to default channel while muted" << std::endl;
+	Debug::log.muted = false;
+	Debug::log << "Printing Channel: " << Debug::log << std::endl;
 
-	Debug::addChannel( "Test" );
-	Debug::channel( "Test" ).log( "Logging to custom channel Test using default output" );
+	DebugChannel test("Test");
+	test << "Logging to custom channel Test using default output"  << std::endl;
 
-	Debug::channel( "Test" ).mute();
-	Debug::channel( "Test" ).log( "Muting channel Test" );
+	test.muted = true;
+ 	test << "Muting channel Test" << std::endl;
+	test.muted = false;
 
-	Debug::channel( "Test" ).unmute();
-	Debug::channel( "Test" ).log( "Unmuting custom channel Test" );
+	test << "Unmuting custom channel Test"  << std::endl;
 
-	Debug::channel( "blah" ).log( "Logging to unininitialized channel" );
+	DebugChannel testFile("TestFile", file);
+	testFile << "Logging to custom channel TestFile using custom output"  << std::endl;
 
-	Debug::addChannel( "Test 2", file );
-	Debug::channel( "Test 2" ).log( "Logging to custom channel Test using custom output" );
-
-	Debug::channel( "Test" ).log( "Changing default output to file debug.log" );
-	Debug::setDefault( file );
-	Debug::log( "Testing default channel logging to file" );
-	Debug::channel( "Test" ).log( "Testing default channel logging to file" );
-
-
+	Debug::log << "Changing default output to file debug.log" << std::endl;
+	DebugChannel::defaultOutput = &file;
+	Debug::log << "Testing default channel logging to file" << std::endl;
+	DebugChannel::defaultOutput = &std::cout;
 }
 
 class TestEvent : public Event<TestEvent> {};
@@ -59,9 +60,9 @@ class TestListener : public IEventListener {
 public:
 	void onEvent( EventID event ) {
 		if( event == TestEvent::ID() )
-			Debug::log( "TestEvent Happened in TestListener" );
+			Debug::log << "TestEvent Happened in TestListener\n";
 		else if( event == TestEvent2::ID() )
-			Debug::log( "TestEvent2 Happened in TestListener" );
+			Debug::log << "TestEvent2 Happened in TestListener\n";
 	}
 };
 
@@ -69,9 +70,9 @@ class TestListener2 : public IEventListener {
 public:
 	void onEvent( EventID event ) {
 		if( event == TestEvent::ID() )
-			Debug::log( "TestEvent Happened in TestListener2" );
+			Debug::log << "TestEvent Happened in TestListener2\n";
 		else if( event == TestEvent2::ID() )
-			Debug::log( "TestEvent2 Happened in TestListener2" );
+			Debug::log << "TestEvent2 Happened in TestListener2\n";
 	}
 };
 
@@ -80,10 +81,10 @@ void testEvents() {
 	TestListener* test = new TestListener();
 	TestListener2* test2 = new TestListener2();
 
-	std::cout << "============================================================" << std::endl;
-	std::cout << "\tTesting Event System" << std::endl;
-	std::cout << "============================================================" << std::endl;
-	std::cout << std::endl;
+	Debug::log << "============================================================" << std::endl;
+	Debug::log << "\tTesting Event System" << std::endl;
+	Debug::log << "============================================================" << std::endl;
+	Debug::log << std::endl;
 
 	dispatch->addListener( TestEvent::ID(), test );
 	dispatch->addListener( TestEvent::ID(), test2 );
@@ -93,7 +94,7 @@ void testEvents() {
 	dispatch->dispatch( TestEvent::ID() );
 	dispatch->dispatch( TestEvent2::ID() );
 	dispatch->removeListener( TestEvent::ID(), test2 );
-	dispatch->dispatch( TestEvent::ID() );
+ 	dispatch->dispatch( TestEvent::ID() );
 	dispatch->dispatch( TestEvent2::ID() );
 	dispatch->dispatch( FakeTestEvent::ID() );
 
