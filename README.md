@@ -29,6 +29,7 @@ Current planned action items before next version
 ## Changelog
 
 ##### Sept 13
+All systems now using c++14 <br>
 Huge improvements to [Debug](./stutil/include/stutil/debug.h) system. Now works similar to the standard output:
 ```cpp
 Debug::log << "This is a " << " good example " << std::endl;
