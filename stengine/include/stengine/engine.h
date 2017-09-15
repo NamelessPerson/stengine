@@ -5,13 +5,13 @@
 #include <vector>
 #include <type_traits>
 
-namespace STEngine {
+namespace stengine {
 	/*
 	------------------------------------------------------------
 		Redefinitions and forward declarations
 	------------------------------------------------------------
 	*/
-	using namespace STUtil;
+	using namespace stutil;
 	class ISceneGraph; //defined in -----.h
 	class GameObject; //Forward Declaration for Parent pointer
 	class Collider; //Forward Declaration for Parent pointer
@@ -82,9 +82,9 @@ namespace STEngine {
 		~GameObject();
 
 		void update();
-		void onCollision(const Collider* col) const;
+		void onCollision( const Collider* col ) const;
 		template<typename C> void		addComponent();
-		template<typename C> Component*	getComponent();
+		template<typename C> C*			getComponent();
 
 		Position position;
 
@@ -108,6 +108,15 @@ namespace STEngine {
 		virtual void update()							= 0;
 
 	private:
+	};
+
+	class Renderer : public Component {
+	public:
+		static const ComponentID ID;
+		Renderer( GameObject* parent );
+		virtual ComponentID getID() = 0;
+		virtual void update() = 0;
+		virtual void render() = 0;
 	};
 
 	/*
@@ -153,8 +162,17 @@ namespace STEngine {
 		static_assert( ( std::is_base_of<Component, C>::value ), "Template Parameter must be of type Component" );
 		C* tmp = new C( this );
 		_components->push_back( tmp );
-		if(std::is_base_of<Collider, C>::value == true)
-			GameManager::addCollider( dynamic_cast<Collider*>(tmp));
+
+		if( std::is_base_of<Collider, C>::value == true )
+			GameManager::addCollider( dynamic_cast<Collider*>( tmp ) );
+	}
+
+	template<typename C>
+	C* GameObject::getComponent() {
+		for(auto* obj : *_components)
+			if(dynamic_cast<C*>(obj))
+				return dynamic_cast<C*>(obj);
+		return NULL;
 	}
 }
 #endif

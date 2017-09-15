@@ -1,6 +1,6 @@
 #include <stutil/debug.h>
 
-namespace STUtil {
+namespace stutil {
 
 	namespace {
 		DebugChannel _log( "LOG" );
@@ -10,9 +10,9 @@ namespace STUtil {
 
 	//Debug Extern Definitions
 	std::ostream* DebugChannel::defaultOutput 	= &std::cout;
-	DebugChannel& Debug::log 				= _log;
-	DebugChannel& Debug::warn 				= _warn;
-	DebugChannel& Debug::err 				= _err;
+	DebugChannel& debug::log 				= _log;
+	DebugChannel& debug::warn 				= _warn;
+	DebugChannel& debug::err 				= _err;
 
 	/*
 	------------------------------------------------------------
@@ -28,10 +28,27 @@ namespace STUtil {
 	}
 
 	DebugChannel& DebugChannel::operator<<( std::ostream & ( *function )( std::ostream& ) ) {
-		if(!muted)
-			function( output == NULL ? *DebugChannel::defaultOutput : *output );
+		if( !muted )
+			function( _buf );
+
 		return *this;
 	}
+
+	DebugChannel& DebugChannel::operator<<( DebugChannel & ( *function )( DebugChannel& ) ) {
+		if( !muted )
+			function( *this );
+
+		return *this;
+	}
+
+	DebugChannel& debug::endl( DebugChannel& chan ) {
+		std::ostream& out = ( chan.output == NULL ? *DebugChannel::defaultOutput : *(chan.output) );
+		out << "[" << chan.name << "] " << chan._buf.str() << std::endl;
+		chan._buf.str(std::string());
+
+		return chan;
+	}
+
 
 	std::ostream& operator<<( std::ostream& os, const DebugChannel& channel ) {
 		os << "{ name: " << channel.name << ", ";

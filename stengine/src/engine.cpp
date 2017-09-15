@@ -1,10 +1,10 @@
 #include <stengine/engine.h>
 #include <stengine/fixedgrid.h>
 
-using namespace STEngine;
+using namespace stengine;
 
-const ComponentID Component::ID = nextID();
-const ComponentID Collider::ID = nextID();
+const ComponentID Component::ID = nextComponentID();
+const ComponentID Collider::ID = nextComponentID();
 
 /*
 ------------------------------------------------------------
@@ -15,20 +15,21 @@ GameObject::GameObject() {
 	_components = new std::vector<Component*>();
 }
 
-GameObject::~GameObject(){
-	for(auto* obj : *_components)
+GameObject::~GameObject() {
+	for( auto* obj : *_components )
 		delete obj;
+
 	delete _components;
 }
 
-void GameObject::update(){
-	for(auto* obj : *_components)
+void GameObject::update() {
+	for( auto* obj : *_components )
 		obj->update();
 }
 
-void GameObject::onCollision(const Collider* col) const{
-	for(auto* obj : *_components)
-		obj->onCollision(col);
+void GameObject::onCollision( const Collider* col ) const {
+	for( auto* obj : *_components )
+		obj->onCollision( col );
 }
 
 
@@ -39,12 +40,12 @@ void GameObject::onCollision(const Collider* col) const{
 */
 GameManager* GameManager::_instance = 0;
 
-GameManager::GameManager() { 
+GameManager::GameManager() {
 	_gameObjects = new std::vector<GameObject*>();
-	_sceneGraph = new FixedGridGraph(100, 100);
+	_sceneGraph = new FixedGridGraph( 100, 100 );
 }
 
-GameManager::~GameManager() { 
+GameManager::~GameManager() {
 	delete _gameObjects;
 }
 
@@ -60,31 +61,35 @@ void GameManager::init() { }
 void GameManager::update() {
 	GameManager& inst = instance();
 
-	for(auto* obj : *(inst._gameObjects))
+	for( auto* obj : * ( inst._gameObjects ) )
 		obj->update();
+
 	inst._sceneGraph->update();
-	
+
 }
-void GameManager::render() { }
+void GameManager::render() {
+	// for( auto* obj : * ( inst._gameObjects ) ){
+	// 	obj.getComponent<Renderer>->render();
+	// }
+}
 
 void GameManager::addObject( GameObject* obj ) {
-	instance()._gameObjects->push_back(obj);
+	instance()._gameObjects->push_back( obj );
 }
 
-void GameManager::addCollider( Collider* obj ){
+void GameManager::addCollider( Collider* obj ) {
 	GameManager& inst = instance();
-	inst._sceneGraph->addCollider(obj);
+	inst._sceneGraph->addCollider( obj );
 }
-void GameManager::removeCollider( Collider* obj ){
+void GameManager::removeCollider( Collider* obj ) {
 	GameManager& inst = instance();
-	inst._sceneGraph->removeCollider(obj);
+	inst._sceneGraph->removeCollider( obj );
 }
 
 /*
 ------------------------------------------------------------
-    GameManager methods
+    Component methods
 ------------------------------------------------------------
 */
-Collider::Collider( GameObject* parent ) : Component( parent ){
-// 	GameManager::addCollider(this);
-}
+Collider::Collider( GameObject* parent ) : Component( parent ) { }
+Renderer::Renderer( GameObject* parent ) : Component( parent ) { }

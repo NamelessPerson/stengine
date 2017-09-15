@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-using namespace STEngine;
+using namespace stengine;
 
 const ComponentID GridSpaceCollider::ID = nextID();
 
@@ -20,7 +20,7 @@ void FixedGridGraph::addCollider( Collider* obj ) {
 	if( dynamic_cast<GridSpaceCollider*>( obj ) )
 		_graph[obj->parent->position.x + ( obj->parent->position.y * _height )].push_back( dynamic_cast<GridSpaceCollider*>( obj ) );
 	else
-		Debug::err << "Error adding collider" ;
+		debug::err << "Error adding collider" << debug::endl;
 }
 void FixedGridGraph::removeCollider( Collider* obj ) {}
 void FixedGridGraph::update() {

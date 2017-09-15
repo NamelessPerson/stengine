@@ -20,7 +20,6 @@ This will run the simple unit tests for the utilities library.
 ## Todo
 Current planned action items before next version
 
-- Improved Debugging System
 - Settings Manager
 - Input Manager
 - Ncurses Rendering System
@@ -28,12 +27,24 @@ Current planned action items before next version
 
 ## Changelog
 
+##### Sept 14
+More Debug system improvements. Now supports multiple buffered input using:
+```cpp
+debug::log << "This is a " << " good example " << debug::endl;
+```
+
+Which will output:
+```
+[LOG] This is a good example
+```
+
 ##### Sept 13
 All systems now using c++14 <br>
 Huge improvements to [Debug](./stutil/include/stutil/debug.h) system. Now works similar to the standard output:
 ```cpp
 Debug::log << "This is a " << " good example " << std::endl;
 ```
+EDIT: This outputted `[LOG] This is a [LOG] good example`. This is fixed in the next recent update.
 See the full demonstration in the [tests](./stutil/test.cpp)
 
 ##### Sept 8

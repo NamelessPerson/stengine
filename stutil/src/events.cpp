@@ -1,6 +1,6 @@
 #include <stutil/events.h>
 
-using namespace STUtil;
+using namespace stutil;
 
 Dispatcher::Dispatcher() {
 	_listeners = new std::unordered_map<EventID, std::unordered_set<IEventListener*>*>();

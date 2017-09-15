@@ -3,7 +3,24 @@
 #include <thread>
 #include <chrono>
 
-using namespace STEngine;
+using namespace stengine;
+
+class TestRenderer : public Renderer {
+public:
+	static const ComponentID ID;
+
+	TestRenderer(GameObject* parent) : Renderer(parent) {}
+
+	ComponentID getID() {
+		return ID;
+	}
+
+	void update() {}
+	void render(){
+
+	}
+};
+const ComponentID TestRenderer::ID = nextComponentID();
 
 class TestComponent : public Component {
 public:
@@ -20,7 +37,7 @@ public:
 	}
 
 	void onCollision(const Collider* col){
-		Debug::log << "Collision Happened\n";
+		debug::log << "Collision Happened" << debug::endl;
 	}
 };
 const ComponentID TestComponent::ID = nextComponentID();
@@ -39,6 +56,11 @@ int main() {
 	obstacle->addComponent<GridSpaceCollider>();
 	obstacle->position.x = 2;
 	GameManager::addObject( obstacle );
+
+	if(auto* j = testObject->getComponent<TestRenderer>())
+		debug::log << "Got Component of ID " << j->getID() << "Should be: " << TestComponent::ID << debug::endl;
+	else
+		debug::log << "Returned NULL" << debug::endl;
 
 
 	while( loops++ < 2 ) {

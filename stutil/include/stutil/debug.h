@@ -3,9 +3,10 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <unordered_map>
 
-namespace STUtil {
+namespace stutil {
 
 	/*
 	============================================================
@@ -22,7 +23,8 @@ namespace STUtil {
 
 		template<class T>
 		DebugChannel& operator<<( const T& t );
-		DebugChannel& operator<<( std::ostream & ( *function )( std::ostream& ) );
+		DebugChannel& operator<<( std::ostream& ( *function )( std::ostream& ) );
+		DebugChannel& operator<<( DebugChannel& ( *function )( DebugChannel& ) );
 		friend std::ostream& operator<<( std::ostream& os, const DebugChannel& channel );
 
 		static std::ostream* defaultOutput;
@@ -30,23 +32,22 @@ namespace STUtil {
 		const std::string 	name;
 		std::ostream* 		output;
 		bool				muted;
+		std::stringstream _buf;
+
+	private:
 	};
 
-	namespace Debug {
+	namespace debug {
 		extern DebugChannel& log;
 		extern DebugChannel& warn;
 		extern DebugChannel& err;
+		DebugChannel& endl(DebugChannel&);
 	};
 
 	template<class T>
 	DebugChannel& DebugChannel::operator<<( const T& t ) {
 		if( !muted ) {
-			std::ostream& out = ( output == NULL ? *DebugChannel::defaultOutput : *output );
-
-			if( out.tellp() <= 0 )
-				out << "[" << name << "] ";
-
-			out << t;
+			_buf << t;
 		}
 
 		return *this;

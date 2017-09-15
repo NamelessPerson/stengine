@@ -3,7 +3,7 @@
 
 #include <stengine/engine.h>
 
-namespace STEngine {
+namespace stengine {
 
 	class GridSpaceCollider : public Collider {
 	public:
