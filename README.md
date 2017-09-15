@@ -18,7 +18,7 @@ make engine test
 This will run the simple unit tests for the utilities library.
 
 ## Todo
-Current planned action items before next version
+Current planned action items before first full version
 
 - Settings Manager
 - Input Manager
