@@ -27,6 +27,9 @@ Current planned action items before next version
 
 ## Changelog
 
+##### Sept 19
+First pass at a rendering system.
+
 ##### Sept 14
 More Debug system improvements. Now supports multiple buffered input using:
 ```cpp

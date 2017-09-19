@@ -142,6 +142,7 @@ namespace stengine {
 
 
 		static void init();
+		static void end();
 		static void update();
 		static void render();
 		static void addObject( GameObject* obj );

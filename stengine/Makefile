@@ -19,8 +19,8 @@ TEST_SRC	= test.cpp
 
 CXX 		= g++-7
 CXXFLAGS 	+= -std=c++14 -Wall -Werror -I$(INCLUDE_DIR) -I../stutil/include -g
-LDFLAGS 	+= -Wall -Werror -L../stutil/lib -lstutil
-TEST_LDFLAGS= -Llib/ -lstengine
+LDFLAGS 	+= -Wall -Werror -L../stutil/lib -lstutil -lncurses
+TEST_LDFLAGS= -Llib/ -lstengine -lncurses
 RM 			= rm -f -d
 
 .PHONY: all
@@ -39,6 +39,7 @@ test: $(TEST)
 $(TEST): $(OUTPUT) $(TEST_SRC)
 	$(CXX) $(TEST_SRC) -o $(TEST) $(CXXFLAGS) $(LDFLAGS) $(TEST_LDFLAGS)
 	./$(TEST)
+	@cat debug.log
 
 clean:
 	$(RM) $(OBJ)

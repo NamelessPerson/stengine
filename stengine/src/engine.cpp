@@ -1,5 +1,6 @@
 #include <stengine/engine.h>
 #include <stengine/fixedgrid.h>
+#include <ncurses.h>
 
 using namespace stengine;
 
@@ -56,7 +57,20 @@ GameManager& GameManager::instance() {
 	return *_instance;
 }
 
-void GameManager::init() { }
+void GameManager::init() { 
+	initscr();
+	if(!has_colors() || !can_change_color()){
+		endwin();
+		printf("Your terminal does not support color\n");
+		exit(1);
+	}
+	noecho();
+	nodelay(stdscr, TRUE);	
+	curs_set(false);
+}
+void GameManager::end() { 
+	endwin();
+}
 
 void GameManager::update() {
 	GameManager& inst = instance();
@@ -68,9 +82,16 @@ void GameManager::update() {
 
 }
 void GameManager::render() {
-	// for( auto* obj : * ( inst._gameObjects ) ){
-	// 	obj.getComponent<Renderer>->render();
-	// }
+	GameManager& inst = instance();
+	clear();
+
+	for( auto* obj : * ( inst._gameObjects ) ){
+		Renderer* ren = obj->getComponent<Renderer>();
+		if(ren)
+			ren->render();
+	}
+
+	refresh();
 }
 
 void GameManager::addObject( GameObject* obj ) {
